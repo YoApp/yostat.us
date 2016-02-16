@@ -15,7 +15,7 @@ $(document).ready(function() {
       } );
 
       posting.done(function( data ) {
-        console.log(data);
+          $('#addbutton').show(); $('#textMeForm').hide();
       });
     });
 
