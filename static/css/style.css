@@ -1,0 +1,104 @@
+@font-face {
+  font-family: Montserrat;
+  src: url('../fonts/Montserrat-Bold.ttf');
+}
+body {
+    background-color:#3498db;
+    font-family: Montserrat;
+    color: white;
+    overflow-x: hidden;
+}
+.outerbox {
+    width:100%;
+}
+.innerbox {
+    height:auto;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    top:100px;
+}
+.join-beta-button {
+    background-color: transparent;
+    font-size: 15pt;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-weight: 700;
+    vertical-align: middle;
+    width: 7em;
+    height: 3em;
+    border: 0;
+    cursor: pointer;
+    text-align: center;
+    font-family: Montserrat;
+    color: white;
+}
+.button {
+    font-family: Montserrat;
+    background-color: #2ecc71;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+#textMeForm input[type=text] {
+    font-family: Montserrat;
+    font-size: 16px;
+    background-color: #1abc9c;
+    color: #fff;
+    line-height: 3em;
+    border: none;
+    display: inline-block;
+    text-align: center;
+}
+
+#textMeForm input[type=button] {
+    font-family: Montserrat;
+    background-color: #2ecc71;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+input::-webkit-input-placeholder {
+color: #ffffff !important;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+color: #ffffff !important;
+}
+
+input::-moz-placeholder {  /* Firefox 19+ */
+color: #ffffff !important;
+}
+
+input:-ms-input-placeholder {
+color: #ffffff !important;
+}
+
+div.item {
+    font-family: courier;
+    vertical-align: middle;
+    display: inline-block;
+    text-align: center;
+}
+.emoji {
+    height: 16px;
+}
+.caption {
+    display: block;
+}
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 115px;
+}

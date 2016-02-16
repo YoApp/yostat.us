@@ -1,0 +1,10 @@
+Flask==0.10.1
+requests==2.7.0
+redis
+flask-redis
+tweepy
+pyyaml
+ua-parser
+user-agents
+flask-cors
+emoji

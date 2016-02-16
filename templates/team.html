@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"></script>
+    <script>
+
+        var socket = new ReconnectingWebSocket("wss://websockets.justyo.co/socket");
+
+        socket.onopen = function(message) {
+            console.log('socket opened');
+            {% for user in results %}
+                socket.send('/subscribe status.update {{ user.username.lower() }}')
+            {% endfor %}
+        };
+
+        socket.onclose = function(message) {
+            console.log('socket closed');
+        };
+
+        socket.onmessage = function(message) {
+          var data = JSON.parse(message.data);
+          var username = data.user.username;
+          var emoji = data.user.status;
+          var index = emoji.codePointAt(0).toString(16);
+          var imageUrl = 'https://cdn.yostat.us/emoji/' + index + '.png';
+          $('#' + username).attr('src', imageUrl);
+        };
+
+    </script>
+{% endblock head %}
+
+{% block content %}
+    {% for user in results %}
+        {{ user.display_name }}
+        <br>
+        <img id="{{ user.username }}" src="{{ user.image_url }}"/>
+        <br>
+    {% endfor %}
+{% endblock %}
+

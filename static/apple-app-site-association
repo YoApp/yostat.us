@@ -1,0 +1,11 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "QM69NKAQF7.co.justyo.status",
+                "paths": [ "/add/*", "/user/*" ]
+            }
+        ]
+    }
+}

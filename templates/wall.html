@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tooltipster.css') }}" />
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/tooltipster/3.3.0/js/jquery.tooltipster.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        var socket = new ReconnectingWebSocket("wss://websockets.justyo.co/socket");
+
+        socket.onopen = function(message) {
+            {% for user in results %}
+                socket.send('/subscribe status.update {{ user.sha1_username }}')
+            {% endfor %}
+        };
+
+        socket.onmessage = function(message) {
+          var data = JSON.parse(message.data);
+          $('#' + data.user.sha1_username).html(data.user.status);
+        };
+
+
+        $(document).ready(function() {
+            $('.tooltip').tooltipster();
+
+            $('.emoji').each(function( index, object ) {
+
+                $.ajax({
+                    url: 'https://api.justyo.co/status/sha1/u/' + object.id,
+                    dataType: 'jsonp',
+                    success: function(data) {
+                        if (data.status) {
+                        $('#' + object.id).html(data.status);
+                    }
+                    }
+                });
+
+            });
+
+        });
+
+    </script>
+{% endblock head %}
+
+{% block content %}
+    {% for user in results %}
+        <div class="item tooltip emoji" title="{{ user.get('display_name') }}" id="{{ user.sha1_username }}">
+        </div>
+    {% endfor %}
+
+     <div class="footer">
+
+    {% if in_wall %}
+
+         <form action="/deletefromwall/" method="POST">
+            <button class="button" type="submit">Remove me</button>
+        </form>
+
+    {% else %}
+
+         <form action="/addtowall/" method="POST">
+            <button class="button" type="submit">Add me to this wall</button>
+        </form>
+
+    {% endif %}
+
+    {% if platform == 'ios' %}
+
+        <button id="getapp" class="button" onclick="location.href='yostatus://user';">Get the app</button>
+
+    {% elif platform == 'android' %}
+
+        <button id="getapp" class="button" onclick="location.href='http://bit.ly/yo-status-android';">Get the app</button>
+
+    {% else %}
+
+        <button id="addbutton" class="button" onclick="$('#addbutton').hide(); $('#textMeForm').show(); $('.phone').focus()">Get the app</button>
+        <form id="textMeForm" style="display: none;">
+            <input class="phone" type="text" size="15" maxlength="15" placeholder="415-555-1234" name="phone" style="display: inline;">
+            <input class="button" type="submit" value="Text me the app!" />
+        </form>
+
+    {% endif %}
+
+    </div>
+
+{% endblock %}
+

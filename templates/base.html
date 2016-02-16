@@ -1,0 +1,120 @@
+<html>
+<head>
+    {% block head %}
+    {% endblock head %}
+
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
+    <link id="favicon" rel="icon" type="image/png" href="{{ image_url }}">
+
+    {% if user %}
+
+        <title>{{ user.display_name }}</title>
+
+        <meta name="apple-itunes-app" content="app-id=1073761513, app-argument=yostatus://user/{{ user.username }}">
+
+        <meta name="description" content="{{ user.display_name }}'s Yo Status">
+        <meta name="keywords" content="emoji,status,yo app,yo,{{ user.username }},{{ user.display_name }}">
+
+        <!-- Facebook -->
+        <meta property="og:site_name" content="{{ user.display_name }}'s Yo Status">
+        <meta property="og:title" content="{{ user.display_name }}'s Yo Status">
+        <meta property="og:description" content="{{ user.display_name }}'s current status">
+        <meta property="og:url" content=" {{ url }}">
+        <meta property="og:image" content="{{ image_url }}">
+        <meta property="og:image:width" content="200" />
+        <meta property="og:image:height" content="200" />
+        <meta property="og:type" content="website">
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="app">
+        <meta name="twitter:site" content="@YoApp">
+        <meta name="twitter:description" content="{{ user.display_name }}'s current status">
+        <meta name="twitter:app:id:iphone" content="1073761513">
+        <meta name="twitter:app:name:iphone" content="Yo Status">
+        <meta name="twitter:app:url:iphone" content="yostatus://user/{{ user.username }}">
+        <meta name="twitter:app:id:googleplay" content="co.justyo.yostatus.android">
+        <meta name="twitter:app:name:googleplay" content="Yo Status">
+        <meta name="twitter:app:url:googleplay" content="http://...">
+
+        <meta name="twitter:image:src" content="{{ image_url }}">
+
+        <meta property="al:ios:url" content="yostatus://user/{{ user.username }}" />
+
+    {% else %}
+
+        <title>Yo Status</title>
+
+        <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+
+        <meta name="apple-itunes-app" content="app-id=1073761513, app-argument=yostatus://">
+
+        <meta name="description" content="Single emoji status">
+        <meta name="keywords" content="emoji,status,yo app">
+
+        <!-- Facebook -->
+        <meta property="og:site_name" content="Yo Status">
+        <meta property="og:title" content="Yo Status">
+        <meta property="og:description" content="Single emoji status.">
+        <meta property="og:url" content=" {{ url }}">
+        <meta property="og:image:width" content="200" />
+        <meta property="og:image:height" content="200" />
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="{{ image_url }}">
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="app">
+        <meta name="twitter:site" content="@YoApp">
+        <meta name="twitter:description" content="Single emoji status for you and your friends.">
+        <meta name="twitter:app:country" content="US">
+        <meta name="twitter:app:name:iphone" content="Yo Status">
+        <meta name="twitter:app:id:iphone" content="1073761513">
+        <meta name="twitter:app:name:googleplay" content="Yo Status">
+        <meta name="twitter:app:id:googleplay" content="co.justyo.yostatus.android">
+        <meta name="twitter:app:url:googleplay" content="http://...">
+        <meta name="twitter:image:src" content="{{ image_url }}">
+
+        <meta property="al:ios:url" content="yostatus://" />
+
+    {% endif %}
+
+
+    <meta property="al:ios:app_store_id" content="1073761513" />
+    <meta property="al:ios:app_name" content="Yo Status" />
+
+    <meta name="author" content="Yo">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+
+</head>
+<body>
+
+<div class="outerbox">
+   <div class="innerbox">
+       {% block content %}
+       {% endblock %}
+   </div>
+</div>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project={{ sc_project }};
+var sc_invisible=1;
+var sc_security="{{ sc_security }}";
+var sc_https=1;
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web analytics"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/{{ sc_project }}/0/{{ sc_security }}/1/"
+alt="web analytics"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+
+</body>
+</html>
+
+
