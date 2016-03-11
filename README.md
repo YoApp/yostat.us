@@ -1,4 +1,5 @@
 [![Slack Status](http://slack.justyo.co/badge.svg)](http://slack.justyo.co)
+[![Run in Postman](https://s3.amazonaws.com/postman-static/run-button.png)](https://www.getpostman.com/run-collection/3fa55dafda723fa11b5a)
 
 ## Docs
 
